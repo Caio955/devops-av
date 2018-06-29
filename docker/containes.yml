@@ -1,0 +1,14 @@
+--- 
+
+- name: Subindo o container
+  hosts: docker
+  remote_user: root
+  tasks:
+   - name: subindo o container
+     docker_container:
+      name: "{{ item }}"
+      image: httpd
+      state: started
+     with_items:
+       - green 
+       - blue 

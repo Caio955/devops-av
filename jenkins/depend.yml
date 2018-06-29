@@ -1,0 +1,24 @@
+--- 
+
+- name: Jenkins
+  hosts: automation
+  remote_user: root
+  tasks:
+   - name: Instalando dependencias do Jenkins 
+     get_url:
+      url:  http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo 
+      dest: /etc/yum.repos.d/jenkins.repo
+      mode: 0777
+   - name: Instalando a chave do Jenkins
+     rpm_key:
+       state: present
+       key:  https://jenkins-ci.org/redhat/jenkins-ci.org.key 
+   - name: Instalando os pacotes necessarios    
+     yum:
+      name: " {{ item }}"
+      state: present
+     with_items: 
+       - git
+       - java
+       - wget
+       - jenkins

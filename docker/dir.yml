@@ -1,0 +1,13 @@
+--- 
+
+- name: Criando diretorios 
+  hosts: docker
+  remote_user: root
+  tasks:
+  - name: Adicionando diretorios 
+    file:
+     path: "{{ item }}"
+     state: directory  
+    with_items:
+     - /blue
+     - /green
